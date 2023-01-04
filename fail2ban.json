@@ -26,7 +26,7 @@
   "fiscalYearStartMonth": 0,
   "gnetId": 9629,
   "graphTooltip": 0,
-  "id": 3,
+  "id": 2,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -35,10 +35,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": {
-        "type": "influxdb",
-        "uid": "iZV9gqZ7z"
-      },
+      "datasource": {},
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -210,10 +207,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": {
-        "type": "influxdb",
-        "uid": "iZV9gqZ7z"
-      },
+      "datasource": {},
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -385,10 +379,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": {
-        "type": "influxdb",
-        "uid": "iZV9gqZ7z"
-      },
+      "datasource": {},
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -564,10 +555,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": {
-        "type": "influxdb",
-        "uid": "iZV9gqZ7z"
-      },
+      "datasource": {},
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -743,10 +731,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": {
-        "type": "influxdb",
-        "uid": "iZV9gqZ7z"
-      },
+      "datasource": {},
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -774,7 +759,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "8.2.5",
+      "pluginVersion": "9.3.2",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -922,10 +907,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": {
-        "type": "influxdb",
-        "uid": "iZV9gqZ7z"
-      },
+      "datasource": {},
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -953,7 +935,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "8.2.5",
+      "pluginVersion": "9.3.2",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -1068,7 +1050,7 @@
       ],
       "thresholds": [],
       "timeRegions": [],
-      "title": "Apache hypervisor",
+      "title": "Apache u-srv",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -1103,7 +1085,7 @@
       "dashes": false,
       "datasource": {
         "type": "influxdb",
-        "uid": "iZV9gqZ7z"
+        "uid": "wvNnck2Vk"
       },
       "fill": 1,
       "fillGradient": 0,
@@ -1132,7 +1114,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "8.2.5",
+      "pluginVersion": "9.3.2",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -1148,9 +1130,42 @@
           },
           "expr": "fail2ban_pureftpd",
           "format": "time_series",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
           "intervalFactor": 1,
           "legendFormat": "{{type}}",
-          "refId": "A"
+          "measurement": "fail2ban",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
         }
       ],
       "thresholds": [],
@@ -1188,10 +1203,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": {
-        "type": "influxdb",
-        "uid": "iZV9gqZ7z"
-      },
+      "datasource": {},
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -1219,7 +1231,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "8.2.5",
+      "pluginVersion": "9.3.2",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -1235,9 +1247,41 @@
           },
           "expr": "fail2ban_dovecot_pop3imap",
           "format": "time_series",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
           "intervalFactor": 1,
           "legendFormat": "{{type}}",
-          "refId": "A"
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
         }
       ],
       "thresholds": [],
@@ -1277,7 +1321,7 @@
       "dashes": false,
       "datasource": {
         "type": "influxdb",
-        "uid": "iZV9gqZ7z"
+        "uid": "wvNnck2Vk"
       },
       "fill": 1,
       "fillGradient": 0,
@@ -1306,7 +1350,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "8.2.5",
+      "pluginVersion": "9.3.2",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -1322,9 +1366,42 @@
           },
           "expr": "fail2ban_postfix_sasl",
           "format": "time_series",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
           "intervalFactor": 1,
           "legendFormat": "{{type}}",
-          "refId": "A"
+          "measurement": "fail2ban",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
         }
       ],
       "thresholds": [],
@@ -1397,6 +1474,6 @@
   "timezone": "",
   "title": "Fail2ban",
   "uid": "cuSLZ6Wnz",
-  "version": 11,
+  "version": 2,
   "weekStart": ""
 }

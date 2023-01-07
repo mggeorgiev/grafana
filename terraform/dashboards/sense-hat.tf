@@ -1,0 +1,1100 @@
+resource "grafana_dashboard" "sense_hat" {
+  config_json = jsonencode({
+    id                   = 4
+    uid                  = "sensehattf"
+    title                = "Sense-hat",
+    tags                 = ["templated", "sense-hat", "pi", "influxdb", "telegraf"],
+    timezone             = "browser",
+    schemaVersion        = 37,
+    refresh              = "15m",
+    style                = "dark",
+    version              = 0,
+    refresh              = "25s"
+    timepicker           = {},
+    description          = "Add fail2ban graph for ssh, purftp, dovecot, postfix"
+    editable             = true,
+    fiscalYearStartMonth = 0,
+    gnetId               = 9629,
+    graphTooltip         = 0,
+    links                = [],
+    liveNow              = false,
+    timezone             = "",
+    weekStart            = "",
+    "annotations" : {
+      "list" : [
+        {
+          "builtIn" : 1,
+          "datasource" : {
+            "type" : "datasource",
+            "uid" : "grafana"
+          },
+          "enable" : true,
+          "hide" : true,
+          "iconColor" : "rgba(0, 211, 255, 1)",
+          "name" : "Annotations & Alerts",
+          "target" : {
+            "limit" : 100,
+            "matchAny" : false,
+            "tags" : [],
+            "type" : "dashboard"
+          },
+          "type" : "dashboard"
+        }
+      ]
+    },
+    "panels" : [
+      {
+        "datasource" : {
+          "type" : "influxdb",
+          "uid" : "${var.datasource_sensehat_uid}"
+        },
+        "fieldConfig" : {
+          "defaults" : {
+            "color" : {
+              "mode" : "thresholds"
+            },
+            "mappings" : [],
+            "thresholds" : {
+              "mode" : "absolute",
+              "steps" : [
+                {
+                  "color" : "green",
+                  "value" : null
+                },
+                {
+                  "color" : "semi-dark-blue",
+                  "value" : -5
+                },
+                {
+                  "color" : "light-blue",
+                  "value" : 5
+                },
+                {
+                  "color" : "semi-dark-green",
+                  "value" : 19
+                },
+                {
+                  "color" : "red",
+                  "value" : 35
+                }
+              ]
+            },
+            "unit" : "celsius"
+          },
+          "overrides" : []
+        },
+        "gridPos" : {
+          "h" : 8,
+          "w" : 6,
+          "x" : 0,
+          "y" : 0
+        },
+        "id" : 10,
+        "options" : {
+          "orientation" : "auto",
+          "reduceOptions" : {
+            "calcs" : [
+              "lastNotNull"
+            ],
+            "fields" : "",
+            "values" : false
+          },
+          "showThresholdLabels" : true,
+          "showThresholdMarkers" : true,
+          "text" : {}
+        },
+        "pluginVersion" : "9.3.2",
+        "targets" : [
+          {
+            "alias" : "calibrated temperature",
+            "datasource" : {
+              "type" : "influxdb",
+              "uid" : "${var.datasource_sensehat_uid}"
+            },
+            "groupBy" : [
+              {
+                "params" : [
+                  "$__interval"
+                ],
+                "type" : "time"
+              },
+              {
+                "params" : [
+                  "null"
+                ],
+                "type" : "fill"
+              }
+            ],
+            "measurement" : "test",
+            "orderByTime" : "ASC",
+            "policy" : "default",
+            "refId" : "A",
+            "resultFormat" : "time_series",
+            "select" : [
+              [
+                {
+                  "params" : [
+                    "temperature_calibrated"
+                  ],
+                  "type" : "field"
+                },
+                {
+                  "params" : [],
+                  "type" : "mean"
+                }
+              ]
+            ],
+            "tags" : []
+          }
+        ],
+        "title" : "calibrated temperature",
+        "transparent" : true,
+        "type" : "gauge"
+      },
+      {
+        "datasource" : {
+          "type" : "influxdb",
+          "uid" : "${var.datasource_sensehat_uid}"
+        },
+        "fieldConfig" : {
+          "defaults" : {
+            "color" : {
+              "mode" : "thresholds"
+            },
+            "mappings" : [],
+            "thresholds" : {
+              "mode" : "absolute",
+              "steps" : [
+                {
+                  "color" : "green",
+                  "value" : null
+                },
+                {
+                  "color" : "semi-dark-blue",
+                  "value" : -5
+                },
+                {
+                  "color" : "light-blue",
+                  "value" : 5
+                },
+                {
+                  "color" : "semi-dark-green",
+                  "value" : 19
+                },
+                {
+                  "color" : "red",
+                  "value" : 35
+                }
+              ]
+            },
+            "unit" : "celsius"
+          },
+          "overrides" : []
+        },
+        "gridPos" : {
+          "h" : 8,
+          "w" : 6,
+          "x" : 6,
+          "y" : 0
+        },
+        "id" : 13,
+        "options" : {
+          "orientation" : "auto",
+          "reduceOptions" : {
+            "calcs" : [
+              "lastNotNull"
+            ],
+            "fields" : "",
+            "values" : false
+          },
+          "showThresholdLabels" : true,
+          "showThresholdMarkers" : true,
+          "text" : {}
+        },
+        "pluginVersion" : "9.3.2",
+        "targets" : [
+          {
+            "alias" : "calibrated temperature",
+            "datasource" : {
+              "type" : "influxdb",
+              "uid" : "${var.datasource_sensehat_uid}"
+            },
+            "groupBy" : [
+              {
+                "params" : [
+                  "$__interval"
+                ],
+                "type" : "time"
+              },
+              {
+                "params" : [
+                  "null"
+                ],
+                "type" : "fill"
+              }
+            ],
+            "measurement" : "test",
+            "orderByTime" : "ASC",
+            "policy" : "default",
+            "refId" : "A",
+            "resultFormat" : "time_series",
+            "select" : [
+              [
+                {
+                  "params" : [
+                    "temperaturevalue"
+                  ],
+                  "type" : "field"
+                },
+                {
+                  "params" : [],
+                  "type" : "mean"
+                }
+              ]
+            ],
+            "tags" : []
+          }
+        ],
+        "title" : "temperature",
+        "transparent" : true,
+        "type" : "gauge"
+      },
+      {
+        "datasource" : {
+          "type" : "influxdb",
+          "uid" : "${var.datasource_sensehat_uid}"
+        },
+        "fieldConfig" : {
+          "defaults" : {
+            "color" : {
+              "mode" : "thresholds"
+            },
+            "mappings" : [],
+            "max" : 100,
+            "min" : 0,
+            "thresholds" : {
+              "mode" : "absolute",
+              "steps" : [
+                {
+                  "color" : "green",
+                  "value" : null
+                },
+                {
+                  "color" : "red",
+                  "value" : 80
+                }
+              ]
+            },
+            "unit" : "humidity"
+          },
+          "overrides" : []
+        },
+        "gridPos" : {
+          "h" : 8,
+          "w" : 6,
+          "x" : 12,
+          "y" : 0
+        },
+        "id" : 12,
+        "options" : {
+          "orientation" : "auto",
+          "reduceOptions" : {
+            "calcs" : [
+              "lastNotNull"
+            ],
+            "fields" : "",
+            "values" : false
+          },
+          "showThresholdLabels" : true,
+          "showThresholdMarkers" : true,
+          "text" : {}
+        },
+        "pluginVersion" : "9.3.2",
+        "targets" : [
+          {
+            "alias" : "temperature",
+            "datasource" : {
+              "type" : "influxdb",
+              "uid" : "${var.datasource_sensehat_uid}"
+            },
+            "groupBy" : [
+              {
+                "params" : [
+                  "$__interval"
+                ],
+                "type" : "time"
+              },
+              {
+                "params" : [
+                  "null"
+                ],
+                "type" : "fill"
+              }
+            ],
+            "measurement" : "test",
+            "orderByTime" : "ASC",
+            "policy" : "default",
+            "refId" : "A",
+            "resultFormat" : "time_series",
+            "select" : [
+              [
+                {
+                  "params" : [
+                    "humidityvalue"
+                  ],
+                  "type" : "field"
+                },
+                {
+                  "params" : [],
+                  "type" : "mean"
+                }
+              ]
+            ],
+            "tags" : []
+          }
+        ],
+        "title" : "humidity",
+        "transparent" : true,
+        "type" : "gauge"
+      },
+      {
+        "datasource" : {
+          "type" : "influxdb",
+          "uid" : "${var.datasource_sensehat_uid}"
+        },
+        "fieldConfig" : {
+          "defaults" : {
+            "color" : {
+              "mode" : "thresholds"
+            },
+            "mappings" : [],
+            "thresholds" : {
+              "mode" : "absolute",
+              "steps" : [
+                {
+                  "color" : "orange",
+                  "value" : null
+                }
+              ]
+            },
+            "unit" : "pressurembar"
+          },
+          "overrides" : []
+        },
+        "gridPos" : {
+          "h" : 8,
+          "w" : 6,
+          "x" : 18,
+          "y" : 0
+        },
+        "id" : 14,
+        "options" : {
+          "orientation" : "auto",
+          "reduceOptions" : {
+            "calcs" : [
+              "lastNotNull"
+            ],
+            "fields" : "",
+            "values" : false
+          },
+          "showThresholdLabels" : true,
+          "showThresholdMarkers" : true,
+          "text" : {}
+        },
+        "pluginVersion" : "9.3.2",
+        "targets" : [
+          {
+            "alias" : "pressure",
+            "datasource" : {
+              "type" : "influxdb",
+              "uid" : "${var.datasource_sensehat_uid}"
+            },
+            "groupBy" : [
+              {
+                "params" : [
+                  "$__interval"
+                ],
+                "type" : "time"
+              },
+              {
+                "params" : [
+                  "null"
+                ],
+                "type" : "fill"
+              }
+            ],
+            "measurement" : "test",
+            "orderByTime" : "ASC",
+            "policy" : "default",
+            "refId" : "A",
+            "resultFormat" : "time_series",
+            "select" : [
+              [
+                {
+                  "params" : [
+                    "pressurevalue"
+                  ],
+                  "type" : "field"
+                },
+                {
+                  "params" : [],
+                  "type" : "mean"
+                }
+              ]
+            ],
+            "tags" : []
+          }
+        ],
+        "title" : "pressure",
+        "transparent" : true,
+        "type" : "gauge"
+      },
+      {
+        "datasource" : {
+          "type" : "influxdb",
+          "uid" : "${var.datasource_sensehat_uid}"
+        },
+        "fieldConfig" : {
+          "defaults" : {
+            "color" : {
+              "mode" : "palette-classic"
+            },
+            "custom" : {
+              "axisCenteredZero" : false,
+              "axisColorMode" : "text",
+              "axisLabel" : "",
+              "axisPlacement" : "auto",
+              "barAlignment" : 0,
+              "drawStyle" : "line",
+              "fillOpacity" : 0,
+              "gradientMode" : "none",
+              "hideFrom" : {
+                "legend" : false,
+                "tooltip" : false,
+                "viz" : false
+              },
+              "lineInterpolation" : "linear",
+              "lineWidth" : 1,
+              "pointSize" : 5,
+              "scaleDistribution" : {
+                "type" : "linear"
+              },
+              "showPoints" : "auto",
+              "spanNulls" : false,
+              "stacking" : {
+                "group" : "A",
+                "mode" : "none"
+              },
+              "thresholdsStyle" : {
+                "mode" : "off"
+              }
+            },
+            "mappings" : [],
+            "thresholds" : {
+              "mode" : "absolute",
+              "steps" : [
+                {
+                  "color" : "green",
+                  "value" : null
+                },
+                {
+                  "color" : "red",
+                  "value" : 80
+                }
+              ]
+            }
+          },
+          "overrides" : []
+        },
+        "gridPos" : {
+          "h" : 9,
+          "w" : 24,
+          "x" : 0,
+          "y" : 8
+        },
+        "id" : 2,
+        "options" : {
+          "legend" : {
+            "calcs" : [],
+            "displayMode" : "list",
+            "placement" : "bottom",
+            "showLegend" : true
+          },
+          "tooltip" : {
+            "mode" : "single",
+            "sort" : "none"
+          }
+        },
+        "targets" : [
+          {
+            "alias" : "temperature",
+            "datasource" : {
+              "type" : "influxdb",
+              "uid" : "${var.datasource_sensehat_uid}"
+            },
+            "groupBy" : [
+              {
+                "params" : [
+                  "$__interval"
+                ],
+                "type" : "time"
+              },
+              {
+                "params" : [
+                  "null"
+                ],
+                "type" : "fill"
+              }
+            ],
+            "measurement" : "test",
+            "orderByTime" : "ASC",
+            "policy" : "default",
+            "refId" : "A",
+            "resultFormat" : "time_series",
+            "select" : [
+              [
+                {
+                  "params" : [
+                    "temperaturevalue"
+                  ],
+                  "type" : "field"
+                },
+                {
+                  "params" : [],
+                  "type" : "mean"
+                }
+              ]
+            ],
+            "tags" : []
+          },
+          {
+            "alias" : "calibrated temperature",
+            "datasource" : {
+              "type" : "influxdb",
+              "uid" : "${var.datasource_sensehat_uid}"
+            },
+            "groupBy" : [
+              {
+                "params" : [
+                  "$__interval"
+                ],
+                "type" : "time"
+              },
+              {
+                "params" : [
+                  "null"
+                ],
+                "type" : "fill"
+              }
+            ],
+            "hide" : false,
+            "measurement" : "test",
+            "orderByTime" : "ASC",
+            "policy" : "default",
+            "refId" : "B",
+            "resultFormat" : "time_series",
+            "select" : [
+              [
+                {
+                  "params" : [
+                    "temperature_calibrated"
+                  ],
+                  "type" : "field"
+                },
+                {
+                  "params" : [],
+                  "type" : "mean"
+                }
+              ]
+            ],
+            "tags" : []
+          },
+          {
+            "alias" : "running agerage",
+            "datasource" : {
+              "type" : "influxdb",
+              "uid" : "${var.datasource_sensehat_uid}"
+            },
+            "groupBy" : [
+              {
+                "params" : [
+                  "$__interval"
+                ],
+                "type" : "time"
+              },
+              {
+                "params" : [
+                  "null"
+                ],
+                "type" : "fill"
+              }
+            ],
+            "hide" : false,
+            "measurement" : "test",
+            "orderByTime" : "ASC",
+            "policy" : "default",
+            "refId" : "C",
+            "resultFormat" : "time_series",
+            "select" : [
+              [
+                {
+                  "params" : [
+                    "running_average"
+                  ],
+                  "type" : "field"
+                },
+                {
+                  "params" : [],
+                  "type" : "mean"
+                }
+              ]
+            ],
+            "tags" : []
+          },
+          {
+            "alias" : "temperature 1 min average",
+            "datasource" : {
+              "type" : "influxdb",
+              "uid" : "${var.datasource_sensehat_uid}"
+            },
+            "groupBy" : [
+              {
+                "params" : [
+                  "1m"
+                ],
+                "type" : "time"
+              },
+              {
+                "params" : [
+                  "null"
+                ],
+                "type" : "fill"
+              }
+            ],
+            "hide" : false,
+            "measurement" : "test",
+            "orderByTime" : "ASC",
+            "policy" : "default",
+            "refId" : "D",
+            "resultFormat" : "time_series",
+            "select" : [
+              [
+                {
+                  "params" : [
+                    "running_average"
+                  ],
+                  "type" : "field"
+                },
+                {
+                  "params" : [],
+                  "type" : "mean"
+                }
+              ]
+            ],
+            "tags" : []
+          }
+        ],
+        "title" : "Temperature",
+        "type" : "timeseries"
+      },
+      {
+        "datasource" : {
+          "type" : "influxdb",
+          "uid" : "${var.datasource_sensehat_uid}"
+        },
+        "fieldConfig" : {
+          "defaults" : {
+            "color" : {
+              "mode" : "palette-classic"
+            },
+            "custom" : {
+              "axisCenteredZero" : false,
+              "axisColorMode" : "text",
+              "axisLabel" : "",
+              "axisPlacement" : "auto",
+              "barAlignment" : 0,
+              "drawStyle" : "line",
+              "fillOpacity" : 0,
+              "gradientMode" : "none",
+              "hideFrom" : {
+                "legend" : false,
+                "tooltip" : false,
+                "viz" : false
+              },
+              "lineInterpolation" : "linear",
+              "lineWidth" : 1,
+              "pointSize" : 5,
+              "scaleDistribution" : {
+                "type" : "linear"
+              },
+              "showPoints" : "auto",
+              "spanNulls" : false,
+              "stacking" : {
+                "group" : "A",
+                "mode" : "none"
+              },
+              "thresholdsStyle" : {
+                "mode" : "off"
+              }
+            },
+            "mappings" : [],
+            "thresholds" : {
+              "mode" : "absolute",
+              "steps" : [
+                {
+                  "color" : "green",
+                  "value" : null
+                },
+                {
+                  "color" : "red",
+                  "value" : 80
+                }
+              ]
+            }
+          },
+          "overrides" : []
+        },
+        "gridPos" : {
+          "h" : 8,
+          "w" : 24,
+          "x" : 0,
+          "y" : 17
+        },
+        "id" : 4,
+        "options" : {
+          "legend" : {
+            "calcs" : [],
+            "displayMode" : "list",
+            "placement" : "bottom",
+            "showLegend" : true
+          },
+          "tooltip" : {
+            "mode" : "single",
+            "sort" : "none"
+          }
+        },
+        "targets" : [
+          {
+            "datasource" : {
+              "type" : "influxdb",
+              "uid" : "${var.datasource_sensehat_uid}"
+            },
+            "groupBy" : [
+              {
+                "params" : [
+                  "$__interval"
+                ],
+                "type" : "time"
+              },
+              {
+                "params" : [
+                  "null"
+                ],
+                "type" : "fill"
+              }
+            ],
+            "measurement" : "test",
+            "orderByTime" : "ASC",
+            "policy" : "default",
+            "refId" : "A",
+            "resultFormat" : "time_series",
+            "select" : [
+              [
+                {
+                  "params" : [
+                    "humidityvalue"
+                  ],
+                  "type" : "field"
+                },
+                {
+                  "params" : [],
+                  "type" : "mean"
+                }
+              ]
+            ],
+            "tags" : []
+          }
+        ],
+        "title" : "Humidity",
+        "type" : "timeseries"
+      },
+      {
+        "datasource" : {
+          "type" : "influxdb",
+          "uid" : "${var.datasource_sensehat_uid}"
+        },
+        "fieldConfig" : {
+          "defaults" : {
+            "color" : {
+              "mode" : "palette-classic"
+            },
+            "custom" : {
+              "axisLabel" : "",
+              "axisPlacement" : "auto",
+              "barAlignment" : 0,
+              "drawStyle" : "line",
+              "fillOpacity" : 0,
+              "gradientMode" : "none",
+              "hideFrom" : {
+                "legend" : false,
+                "tooltip" : false,
+                "viz" : false
+              },
+              "lineInterpolation" : "linear",
+              "lineWidth" : 1,
+              "pointSize" : 5,
+              "scaleDistribution" : {
+                "type" : "linear"
+              },
+              "showPoints" : "auto",
+              "spanNulls" : false,
+              "stacking" : {
+                "group" : "A",
+                "mode" : "none"
+              },
+              "thresholdsStyle" : {
+                "mode" : "off"
+              }
+            },
+            "mappings" : [],
+            "thresholds" : {
+              "mode" : "absolute",
+              "steps" : [
+                {
+                  "color" : "green"
+                },
+                {
+                  "color" : "red",
+                  "value" : 80
+                }
+              ]
+            }
+          },
+          "overrides" : []
+        },
+        "gridPos" : {
+          "h" : 8,
+          "w" : 24,
+          "x" : 0,
+          "y" : 25
+        },
+        "id" : 6,
+        "options" : {
+          "legend" : {
+            "calcs" : [],
+            "displayMode" : "list",
+            "placement" : "bottom",
+            "showLegend" : true
+          },
+          "tooltip" : {
+            "mode" : "single"
+          }
+        },
+        "targets" : [
+          {
+            "datasource" : {
+              "type" : "influxdb",
+              "uid" : "${var.datasource_sensehat_uid}"
+            },
+            "groupBy" : [
+              {
+                "params" : [
+                  "$__interval"
+                ],
+                "type" : "time"
+              },
+              {
+                "params" : [
+                  "null"
+                ],
+                "type" : "fill"
+              }
+            ],
+            "measurement" : "test",
+            "orderByTime" : "ASC",
+            "policy" : "default",
+            "refId" : "A",
+            "resultFormat" : "time_series",
+            "select" : [
+              [
+                {
+                  "params" : [
+                    "pressurevalue"
+                  ],
+                  "type" : "field"
+                },
+                {
+                  "params" : [],
+                  "type" : "mean"
+                }
+              ]
+            ],
+            "tags" : []
+          }
+        ],
+        "title" : "Pressure",
+        "type" : "timeseries"
+      },
+      {
+        "datasource" : {
+          "type" : "influxdb",
+          "uid" : "${var.datasource_sensehat_uid}"
+        },
+        "fieldConfig" : {
+          "defaults" : {
+            "color" : {
+              "mode" : "palette-classic"
+            },
+            "custom" : {
+              "axisLabel" : "",
+              "axisPlacement" : "auto",
+              "barAlignment" : 0,
+              "drawStyle" : "line",
+              "fillOpacity" : 0,
+              "gradientMode" : "none",
+              "hideFrom" : {
+                "legend" : false,
+                "tooltip" : false,
+                "viz" : false
+              },
+              "lineInterpolation" : "linear",
+              "lineWidth" : 1,
+              "pointSize" : 5,
+              "scaleDistribution" : {
+                "type" : "linear"
+              },
+              "showPoints" : "auto",
+              "spanNulls" : false,
+              "stacking" : {
+                "group" : "A",
+                "mode" : "none"
+              },
+              "thresholdsStyle" : {
+                "mode" : "off"
+              }
+            },
+            "mappings" : [],
+            "thresholds" : {
+              "mode" : "absolute",
+              "steps" : [
+                {
+                  "color" : "green"
+                },
+                {
+                  "color" : "red",
+                  "value" : 80
+                }
+              ]
+            }
+          },
+          "overrides" : []
+        },
+        "gridPos" : {
+          "h" : 8,
+          "w" : 24,
+          "x" : 0,
+          "y" : 33
+        },
+        "id" : 16,
+        "options" : {
+          "legend" : {
+            "calcs" : [],
+            "displayMode" : "list",
+            "placement" : "bottom",
+            "showLegend" : true
+          },
+          "tooltip" : {
+            "mode" : "single"
+          }
+        },
+        "targets" : [
+          {
+            "datasource" : {
+              "type" : "influxdb",
+              "uid" : "${var.datasource_sensehat_uid}"
+            },
+            "groupBy" : [
+              {
+                "params" : [
+                  "$__interval"
+                ],
+                "type" : "time"
+              },
+              {
+                "params" : [
+                  "null"
+                ],
+                "type" : "fill"
+              }
+            ],
+            "measurement" : "downsampled_test",
+            "orderByTime" : "ASC",
+            "policy" : "rp_logger_db_2y",
+            "refId" : "A",
+            "resultFormat" : "time_series",
+            "select" : [
+              [
+                {
+                  "params" : [
+                    "mean_humidity"
+                  ],
+                  "type" : "field"
+                },
+                {
+                  "params" : [],
+                  "type" : "mean"
+                }
+              ],
+              [
+                {
+                  "params" : [
+                    "mean_pressure"
+                  ],
+                  "type" : "field"
+                },
+                {
+                  "params" : [],
+                  "type" : "mean"
+                }
+              ],
+              [
+                {
+                  "params" : [
+                    "mean_temperature"
+                  ],
+                  "type" : "field"
+                },
+                {
+                  "params" : [],
+                  "type" : "mean"
+                }
+              ],
+              [
+                {
+                  "params" : [
+                    "mean_temperature_calibrated"
+                  ],
+                  "type" : "field"
+                },
+                {
+                  "params" : [],
+                  "type" : "mean"
+                }
+              ]
+            ],
+            "tags" : []
+          }
+        ],
+        "title" : "Downsampled Data",
+        "type" : "timeseries"
+      }
+    ],
+    "templating" : {
+      "list" : []
+    },
+    "time" : {
+      "from" : "now-24h",
+      "to" : "now"
+    }
+  })
+}

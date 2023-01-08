@@ -3,7 +3,7 @@ resource "grafana_dashboard" "fail2ban" {
     id                   = 2
     uid                  = "failtobantf"
     title                = "Fail2ban",
-    tags                 = ["templated", "influxdb", "telegraf"],
+    tags                 = ["secops", "influxdb", "templated", "telegraf"],
     timezone             = "browser",
     schemaVersion        = 37,
     refresh              = "",

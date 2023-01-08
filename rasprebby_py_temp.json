@@ -32,6 +32,8 @@
       "icon": "external link",
       "includeVars": true,
       "tags": [
+        "templated",
+        "influxdb",
         "telegraf"
       ],
       "targetBlank": true,
@@ -391,8 +393,8 @@
           "tags": [
             {
               "key": "host",
-              "operator": "=",
-              "value": "pi8gb.habay"
+              "operator": "=~",
+              "value": "/^$server$/"
             }
           ]
         },
@@ -871,8 +873,11 @@
   "schemaVersion": 37,
   "style": "dark",
   "tags": [
-    "raspberry",
-    "temperature"
+    "temperature",
+    "raspberry-pi",
+    "influxdb",
+    "templated",
+    "telegraf"
   ],
   "templating": {
     "list": [

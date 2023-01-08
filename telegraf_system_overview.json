@@ -4308,7 +4308,10 @@
   "schemaVersion": 37,
   "style": "dark",
   "tags": [
+    "kvm",
+    "systems",
     "influxdb",
+    "templated",
     "telegraf"
   ],
   "templating": {

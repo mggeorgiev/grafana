@@ -3,7 +3,7 @@ resource "grafana_dashboard" "sense_hat" {
     id                   = 4
     uid                  = "sensehattf"
     title                = "Sense-hat",
-    tags                 = ["templated", "sense-hat", "pi", "influxdb", "telegraf"],
+    tags                 = ["sense-hat", "raspberry-pi", "influxdb", "templated", "telegraf" ],
     timezone             = "browser",
     schemaVersion        = 37,
     refresh              = "15m",
